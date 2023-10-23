@@ -7,14 +7,18 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import com.example.parques.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val miDialogo = MiDialogFragment()
 
-        val buttonGuardar = findViewById<Button>(R.id.boton)
-        buttonGuardar.setOnClickListener{
+        val buttonGuardar = findViewById<Button>(R.id.boton )
+        buttonGuardar.setOnClickListener {
             val nombre = findViewById<EditText>(R.id.nombre).text.toString()
 
             val descripcion = findViewById<EditText>(R.id.descripcion).text.toString()
@@ -25,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
             val horaApertura = findViewById<Spinner>(R.id.spinner1).selectedItem.toString()
 
-            val horaCierre = findViewById<Spinner>(R.id.spinner2).selectedItem.toString()
+            val horaCierre = findViewById<Spinner>(R.id.spinner1).selectedItem.toString()
 
             val deportes = findViewById<RadioButton>(R.id.cDeportes).isChecked
 
@@ -46,7 +50,9 @@ class MainActivity : AppCompatActivity() {
             Log.d("MainActivity", "Restaurante: " + restaurante)
             Log.d("MainActivity", "Zona de mascotas: "+ zonaMascotas)
 
+            binding.boton.setOnClickListener{
+                miDialogo.show(supportFragmentManager,"MiDialogo")
+            }
         }
-
     }
 }
